@@ -2,8 +2,7 @@
 
 Para ejecutar:
 
-  '''
+  ```
   npm install
   npm run server
-  
-  '''
+  ```
