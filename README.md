@@ -157,7 +157,7 @@ TF_IDF() {
 
 Ejemplo:
 
-![](src/assets/Ejemplo.png)
+![](src/assets/Ejemplo.jpg)
 
  
  
