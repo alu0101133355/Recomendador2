@@ -18,7 +18,7 @@ Nuestra aplñicacion visualmente se ve de la siguiente forma:
 Cuando apretamos el boton go, se le llama a la funcion getData(), que recopila los datos del fichero que se ha cargado:
 
 ```
-getData() {
+getDatos() {
       alert("El programa puede tardar un tiempo")
       this.documents = []
       this.statDocuments = []
@@ -49,7 +49,10 @@ getData() {
             })
           })
         })
-    
+        this.TF_IDF()
+        this.CalCoseno()
+        this.Resultado()
+  
  ```
  
  Cuando termina con la funcion getData() se llama a las siguientes funciones:
@@ -57,47 +60,45 @@ getData() {
  * this.simCos(), calcula los valores de cada termino
 
 ```
-simCos() {
-    for (let i = 0; i < this.documents.length; i++) {
-      for (let j = 0; j < this.documents.length; j++) {
-        if (i === j) break
-        let sum = 0;
-        this.statDocuments.forEach(element => {
-          this.statDocuments.forEach(element2 => {
-            if (i === element.doc_index && j === element2.doc_index && element.term === element2.term) {
-              sum += element.TF_IDF * element2.TF_IDF
+CalCoseno() { 
+      for (let i = 0; i < this.statDocuments.length; i++) {
+        let sameDocCount = 0
+        let otherDocCount = new Set()
+        otherDocCount.add("Initialized")
+        for (let j = 0; j < this.statDocuments.length; j++) {
+          if (this.statDocuments[i].term === this.statDocuments[j].term) {
+            if (this.statDocuments[i].doc_index === this.statDocuments[j].doc_index) {
+              sameDocCount = sameDocCount + 1
+            } else {
+              otherDocCount.add(this.statDocuments[j].doc_index)
             }
-          })
-        })
-        this.simCosArray.push({x: i, y: j, sim: (sum).toFixed(5)})
+          }
+        }
+        this.statDocuments[i].TF = (sameDocCount / this.lengths[this.statDocuments[i].doc_index]).toFixed(3);
+        this.statDocuments[i].IDF = (Math.log(this.documents.length / otherDocCount.size) / Math.log(10)).toFixed(3)
+        this.statDocuments[i].TF_IDF = (this.statDocuments[i].TF * this.statDocuments[i].IDF).toFixed(4)
       }
-    }
-  }
   
  ```
  
 * this.calculateTF_IDF(), calcula los valores de cada termino
 
 ```
-calculateTF_IDF() { 
-    for (let i = 0; i < this.statDocuments.length; i++) {
-      let sameDocCount = 0
-      let otherDocCount = new Set()
-      otherDocCount.add("Initialized")
-      for (let j = 0; j < this.statDocuments.length; j++) {
-        if (this.statDocuments[i].term === this.statDocuments[j].term) {
-          if (this.statDocuments[i].doc_index === this.statDocuments[j].doc_index) {
-            sameDocCount = sameDocCount + 1
-          } else {
-            otherDocCount.add(this.statDocuments[j].doc_index)
-          }
+TF_IDF() {
+      for (let i = 0; i < this.documents.length; i++) {
+        for (let j = 0; j < this.documents.length; j++) {
+          if (i === j) break
+          let sum = 0;
+          this.statDocuments.forEach(element => {
+            this.statDocuments.forEach(element2 => {
+              if (i === element.doc_index && j === element2.doc_index && element.term === element2.term) {
+                sum += element.TF_IDF * element2.TF_IDF
+              }
+            })
+          })
+          this.CalCosenoArray.push({x: i, y: j, sim: (sum).toFixed(5)})
         }
       }
-      this.statDocuments[i].TF = (sameDocCount / this.lengths[this.statDocuments[i].doc_index]).toFixed(3);
-      this.statDocuments[i].IDF = (Math.log(this.documents.length / otherDocCount.size) / Math.log(10)).toFixed(3)
-      this.statDocuments[i].TF_IDF = (this.statDocuments[i].TF * this.statDocuments[i].IDF).toFixed(4)
-    }
-  }
   
  ```
  
@@ -138,15 +139,15 @@ calculateTF_IDF() {
         list.appendChild(sublist)
       })
       page.appendChild(list)
-      const simCosList = document.createElement("ul");
-      this.simCosArray.forEach((element, index) => {
+      const CalCosenoList = document.createElement("ul");
+      this.CalCosenoArray.forEach((element, index) => {
         if (index !== 0) {
           const simTerm = document.createElement("li");
-          simTerm.innerHTML = "simCos(" + element.x + ", " + element.y + ") = " + element.sim;
-          simCosList.appendChild(simTerm)
+          simTerm.innerHTML = "CalCoseno(" + element.x + ", " + element.y + ") = " + element.sim;
+          CalCosenoList.appendChild(simTerm)
         }
       })
-      page.appendChild(simCosList)
+      page.appendChild(CalCosenoList)
    
    ```
 
