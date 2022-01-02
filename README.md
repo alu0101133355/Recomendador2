@@ -11,7 +11,7 @@
 
 El arbol de directorios quedaria de la siguiente dorma:
 
-![](src/assets/Arbol.png)
+![](src/assets/Arbol.jpg)
 
 Para el desarrollo de la aplicacion he utilizado Vue que se basa en componentes. Entre los compoenentes realizado se ha creado App.vue, fichero que es montado por nuestro main.js y que importa los componentes Header que es nuestra cabecera y tambien carga el Content.vue.
  
@@ -19,7 +19,7 @@ Nuestra aplñicacion visualmente se ve de la siguiente forma:
  
 ![](src/assets/Cabecera.jpg)
 
-Cuando apretamos el boton go, se le llama a la funcion getData(), que recopila los datos del fichero que se ha cargado:
+Cuando apretamos el boton go, se le llama a la funcion getDatos(), que recopila los datos del fichero que se ha cargado:
 
 ```
 getDatos() {
@@ -61,7 +61,7 @@ getDatos() {
  
  Cuando termina con la funcion getData() se llama a las siguientes funciones:
  
- * this.simCos(), calcula los valores de cada termino
+ * this.CalCoseno(), calcula los valores de cada termino
 
 ```
 CalCoseno() { 
@@ -85,7 +85,7 @@ CalCoseno() {
   
  ```
  
-* this.calculateTF_IDF(), calcula los valores de cada termino
+* this.TF_IDF(), calcula los valores de cada termino
 
 ```
 TF_IDF() {
