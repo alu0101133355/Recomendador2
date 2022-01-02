@@ -8,13 +8,17 @@
   ```
 
  ## Codigo realizado
- 
+
+El arbol de directorios quedaria de la siguiente dorma:
+
+![](src/assets/Arbol.png)
+
 Para el desarrollo de la aplicacion he utilizado Vue que se basa en componentes. Entre los compoenentes realizado se ha creado App.vue, fichero que es montado por nuestro main.js y que importa los componentes Header que es nuestra cabecera y tambien carga el Content.vue.
  
 Nuestra aplñicacion visualmente se ve de la siguiente forma:
  
- IMAGEN CABECERA
- 
+![](src/assets/Cabecera.jpg)
+
 Cuando apretamos el boton go, se le llama a la funcion getData(), que recopila los datos del fichero que se ha cargado:
 
 ```
@@ -152,6 +156,8 @@ TF_IDF() {
    ```
 
 Ejemplo:
+
+![](src/assets/Ejemplo.png)
 
  
  
